@@ -1,0 +1,81 @@
+openapi: 3.0.0
+info:
+  title: API Testing
+  description: API Testing
+  version: 0.1.9
+
+servers:
+  - url: http://127.0.0.1:8000/api
+    description: local server port 8000
+
+
+paths:
+  /presences:
+    post:
+      summary: Returns a absen.
+      description: Absensi masuk
+      parameters:
+        - name: type
+          in: query
+          required: true
+          schema:
+            type: string
+            enum:
+              - in
+              - out
+
+      responses:
+        '200':
+          description: A JSON object with the response data
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      data:
+                        type: array
+                  message:
+                     type: string
+      tags:
+        - Presence
+
+  /payslips:
+    get:
+      summary: Returns a payslips.
+      description: Check gaji
+      parameters:
+        - name: month
+          in: query
+          required: true
+          schema:
+            type: string
+
+      responses:
+        '200':
+          description: A JSON object with the response data
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  status:
+                    type: boolean
+                  data:
+                    type: object
+                    properties:
+                      data:
+                        type: array
+                  message:
+                    type: string
+      tags:
+        - Payslips
+
+tags:
+  - name: Presence
+  - name: Payslips
+    description: Endpoints for absen operations
